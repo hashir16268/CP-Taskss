@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+// Finds min and max of array a[] of size n via reference parameters
+void getExtremes(float& min, float& max, float a[], int n) {
+    min = a[0];   // initialize both to first element
+    max = a[0];
+
+    for (int i = 1; i < n; i++) {
+        if (a[i] < min)  min = a[i];   // update min
+        if (a[i] > max)  max = a[i];   // update max
+    }
+}
+
+int main() {
+    float arr[] = {3.5, 1.2, 8.7, 4.0, 2.9};
+    float mn, mx;
+    getExtremes(mn, mx, arr, 5);
+    cout << "Min: " << mn << endl;   // 1.2
+    cout << "Max: " << mx << endl;   // 8.7
+    return 0;
+}
