@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+// Mean: sum / count
+double calculateMean(double arr[], int n) {
+    double sum = 0;
+    for (int i = 0; i < n; i++) sum += arr[i];
+    return sum / n;
+}
+
+// Median: sort copy then pick middle
+double calculateMedian(double arr[], int n) {
+    double tmp[100];
+    for (int i = 0; i < n; i++) tmp[i] = arr[i];  // copy
+
+    // bubble sort
+    for (int i = 0; i < n-1; i++)
+        for (int j = 0; j < n-i-1; j++)
+            if (tmp[j] > tmp[j+1]) {
+                double t = tmp[j]; tmp[j] = tmp[j+1]; tmp[j+1] = t;
+            }
+
+    if (n % 2 == 0) return (tmp[n/2-1] + tmp[n/2]) / 2.0;  // even
+    else            return tmp[n/2];                          // odd
+}
+
+// Mode: most frequent value
+double calculateMode(double arr[], int n) {
+    double mode = arr[0];
+    int maxCnt = 0;
+    for (int i = 0; i < n; i++) {
+        int cnt = 0;
+        for (int j = 0; j < n; j++)
+            if (arr[j] == arr[i]) cnt++;
+        if (cnt > maxCnt) { maxCnt = cnt; mode = arr[i]; }
+    }
+    return mode;
+}
+
+int main() {
+    double arr[] = {4, 1, 2, 2, 3, 5};
+    int n = 6;
+    cout << "Mean   : " << calculateMean(arr, n)   << endl;  // 2.833
+    cout << "Median : " << calculateMedian(arr, n) << endl;  // 2.5
+    cout << "Mode   : " << calculateMode(arr, n)   << endl;  // 2
+    return 0;
+}
