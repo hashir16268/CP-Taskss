@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void analyzeString(string str) {
+    int chars=0, spaces=0, tabs=0, lines=1;  // min 1 line
+
+    for (int i = 0; i < (int)str.length(); i++) {
+        chars++;                              // count every character
+        if      (str[i] == ' ')  spaces++;   // space
+        else if (str[i] == '\t') tabs++;     // tab
+        else if (str[i] == '\n') lines++;    // newline = new line
+    }
+
+    cout << "Total Characters : " << chars  << endl;
+    cout << "Total Spaces     : " << spaces << endl;
+    cout << "Total Tabs       : " << tabs   << endl;
+    cout << "Total Lines      : " << lines  << endl;
+}
+
+int main() {
+    string input = "", line;
+    cout << "Enter text (type END to finish):" << endl;
+    while (getline(cin, line)) {
+        if (line == "END") break;
+        input += line + "\n";
+    }
+    analyzeString(input);
+    return 0;
+}
